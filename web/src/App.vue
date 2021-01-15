@@ -1,15 +1,38 @@
 <template>
   <v-app>
+    <v-app-bar app dark>
+      <v-toolbar-title>
+        <v-row align="center">
+          <v-col>
+            <v-avatar size="50">
+              <img
+                alt="user"
+                src="https://cdn.pixabay.com/photo/2020/06/24/19/12/cabbage-5337431_1280.jpg"
+              />
+            </v-avatar>
+          </v-col>
+          <v-col class="hidden-xs-only"> John Doe </v-col>
+        </v-row>
+      </v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon>
+        <v-icon>mdi-export</v-icon>
+      </v-btn>
+    </v-app-bar>
+
     <v-main id="scroll__main">
       <v-container fluid>
-        <router-view></router-view>
+        <v-container fluid>
+          <router-view></router-view>
+        </v-container>
       </v-container>
     </v-main>
 
     <v-footer app v-bind="localAttrs" dark :padless="padless">
-      
       <v-card flat tile width="100%" class="lighten-1 text-center">
-         <v-bottom-navigation :value="$router.name" color="red" grow>
+        <v-bottom-navigation :value="$router.name" color="red" grow>
           <v-btn to="/" icon>
             <span>Главная</span>
 
