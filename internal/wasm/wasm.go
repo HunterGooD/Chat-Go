@@ -23,5 +23,5 @@ func base64encode() js.Func {
 func main() {
 	js.Global().Set("base64decode", base64decode())
 	js.Global().Set("base64encode", base64encode())
-	<-make(chan struct{})
+	<-make(chan bool)
 }

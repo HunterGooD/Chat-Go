@@ -3,7 +3,7 @@
         "db": "mysql",
         "name": "chat",
         "user": "root",
-        "password": null,
+        "password": "",
         "host": "127.0.0.1",
         "port": "3306"
     }

@@ -9,14 +9,14 @@
     <v-footer app v-bind="localAttrs" dark :padless="padless">
       
       <v-card flat tile width="100%" class="lighten-1 text-center">
-         <v-bottom-navigation :value="value" color="red" grow>
-          <v-btn icon>
+         <v-bottom-navigation :value="$router.name" color="red" grow>
+          <v-btn to="/" icon>
             <span>Главная</span>
 
             <v-icon>mdi-home</v-icon>
           </v-btn>
 
-          <v-btn icon>
+          <v-btn to="about" icon>
             <span>Сообщения</span>
 
             <v-icon>mdi-email</v-icon>
