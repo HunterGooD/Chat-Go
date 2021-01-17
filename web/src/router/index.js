@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import About from '../views/About.vue'
+import Messages from '../views/Messages.vue'
 
 Vue.use(VueRouter)
 
@@ -9,12 +9,34 @@ const routes = [
   {
     path: '/',
     name: 'Home',
+    meta: {
+      auth: true,
+    },
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    component: About
+    path: '/messages',
+    name: 'Messages',
+    meta: {
+      auth: true,
+    },
+    component: Messages
+  },
+  {
+    path: '/signin',
+    name: 'Signin',
+    meta: {
+      auth: false,
+    },
+    component: Home
+  },
+  {
+    path: '/signup',
+    name: 'Signup',
+    meta: {
+      auth: false,
+    },
+    component: Home
   }
 ]
 

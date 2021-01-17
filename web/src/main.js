@@ -6,7 +6,20 @@ import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false
 
+router.beforeEach((to, from, next) => {
+
+  if (to.meta.auth && !router.app.isAuth) return next("/signin")
+  if ((to.path == "/signin" || to.path == "/signup") && router.app.isAuth) return next("/")
+
+  return next()
+});
+
 new Vue({
+  data() {
+    return {
+      isAuth: false,
+    }
+  },
   router,
   store,
   vuetify,

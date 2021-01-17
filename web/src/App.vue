@@ -32,7 +32,7 @@
 
     <v-footer app v-bind="localAttrs" dark :padless="padless">
       <v-card flat tile width="100%" class="lighten-1 text-center">
-        <v-bottom-navigation :value="$router.name" color="red" grow>
+        <v-bottom-navigation :value="$router.name" color="red" grow v-if="isAuth">
           <v-btn to="/" icon>
             <span>Главная</span>
 
@@ -82,7 +82,6 @@ export default {
   computed: {
     localAttrs() {
       const attrs = {};
-
       if (this.variant === "default") {
         attrs.absolute = false;
         attrs.fixed = false;
