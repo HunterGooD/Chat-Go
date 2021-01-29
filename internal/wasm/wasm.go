@@ -3,8 +3,6 @@ package main
 import (
 	"syscall/js"
 
-	"github.com/HunterGooD/Chat-Go/internal/app"
-
 	"github.com/HunterGooD/Chat-Go/pkg/crypto"
 )
 
@@ -24,7 +22,7 @@ func base64encode() js.Func {
 
 func getAesKey() js.Func {
 	return js.FuncOf(func(this js.Value, input []js.Value) interface{} {
-		return app.AESKEY
+		return crypto.Base64Decode("You aes key")
 	})
 }
 

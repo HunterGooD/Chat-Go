@@ -1,4 +1,5 @@
 configs/passwords.json
+deployments
 
 .DS_Store
 node_modules

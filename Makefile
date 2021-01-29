@@ -2,7 +2,7 @@ build: build_front \
 	build_goland
 
 build_wasm:
-	GOARCH=wasm GOOS=js go build -o web/public/javascript/lib/utils.wasm internal/wasm/wasm.go
+	GOARCH=wasm GOOS=js go build -o web/public/assets/js/lib/utils.wasm internal/wasm/wasm.go
 
 build_front:
 	cd web/ && yarn build
@@ -12,6 +12,7 @@ build_goland:
 	go build -o dist/chat/main cmd/chat/main.go
 
 install:
+	go get ./...
 	cd web
 	npm i
 	yarn build
@@ -22,6 +23,9 @@ clean:
 	rm -rf web/dist
 	rm -rf dist
 
+testing:
+	go test ./...
+
 help:
 	@echo "                                                             "
 	@echo "                  Существующие команды                       "
@@ -29,5 +33,6 @@ help:
 	@echo "install       : Установка всех модулей и сборка прокта	    "
 	@echo "clean         : Очистить проект                              "
 	@echo "build_wasm    : Сборка WASM модулей               	        "
+	@echo "testing       : тестирование компонентов             	    "
 	@echo "-------------------------------------------------------------"
 	@echo "                                                             "

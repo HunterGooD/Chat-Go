@@ -8,16 +8,20 @@ Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
 
-  if (to.meta.auth && !router.app.isAuth) return next("/signin")
-  if ((to.path == "/signin" || to.path == "/signup") && router.app.isAuth) return next("/")
+  if (to.meta.auth && !router.app.isAuth) {
+    next("/signin")
+  } else if ((to.path == "/signin" || to.path == "/signup") && router.app.isAuth) {
+    next("/")
+  } else {
+    next()
+  }
 
-  return next()
 });
 
 new Vue({
   data() {
     return {
-      isAuth: false,
+      isAuth: true,
     }
   },
   router,

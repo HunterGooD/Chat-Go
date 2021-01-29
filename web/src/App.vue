@@ -1,26 +1,40 @@
 <template>
   <v-app>
-    <v-app-bar app dark>
-      <v-toolbar-title>
-        <v-row align="center">
-          <v-col>
-            <v-avatar size="50">
-              <img
-                alt="user"
-                src="https://cdn.pixabay.com/photo/2020/06/24/19/12/cabbage-5337431_1280.jpg"
-              />
-            </v-avatar>
-          </v-col>
-          <v-col class="hidden-xs-only"> John Doe </v-col>
-        </v-row>
-      </v-toolbar-title>
+    <v-navigation-drawer v-model="drawer" dark temporary right app>
+      <template v-slot:prepend>
+        <v-list-item two-line>
+          <v-list-item-avatar>
+            <img src="https://randomuser.me/api/portraits/women/81.jpg" />
+          </v-list-item-avatar>
 
-      <v-spacer></v-spacer>
+          <v-list-item-content>
+            <v-list-item-title>
+              <span>Jane Smith </span>
+            </v-list-item-title>
+            <v-list-item-subtitle>Logged In</v-list-item-subtitle>
+          </v-list-item-content>
+          <v-list-item-action>
+            <v-btn icon>
+              <v-icon>mdi-logout</v-icon>
+            </v-btn>
+          </v-list-item-action>
+        </v-list-item>
+      </template>
 
-      <v-btn icon>
-        <v-icon>mdi-export</v-icon>
-      </v-btn>
-    </v-app-bar>
+      <v-divider></v-divider>
+
+      <v-list dense>
+        <v-list-item v-for="item in items" :key="item.title">
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
 
     <v-main id="scroll__main">
       <v-container fluid>
@@ -32,23 +46,34 @@
 
     <v-footer app v-bind="localAttrs" dark :padless="padless">
       <v-card flat tile width="100%" class="lighten-1 text-center">
-        <v-bottom-navigation :value="$router.name" color="red" grow v-if="isAuth">
-          <v-btn to="/" icon>
+        <v-bottom-navigation
+          :value="$router.name"
+          color="red"
+          shift
+          v-if="$root.isAuth"
+        >
+          <v-btn to="/" icon x-small>
             <span>Главная</span>
 
             <v-icon>mdi-home</v-icon>
           </v-btn>
 
-          <v-btn to="about" icon>
+          <v-btn to="/messages" icon x-small>
             <span>Сообщения</span>
 
             <v-icon>mdi-email</v-icon>
           </v-btn>
 
-          <v-btn icon>
+          <v-btn icon x-small>
             <span>Каленьдарь</span>
 
             <v-icon>mdi-calendar</v-icon>
+          </v-btn>
+
+          <v-btn icon @click.stop="drawer = !drawer" x-small>
+            <span>настройки</span>
+
+            <v-icon>mdi-dialpad</v-icon>
           </v-btn>
         </v-bottom-navigation>
 
@@ -73,6 +98,11 @@ export default {
     drawer: false,
     group: null,
     variant: "default",
+    items: [
+      { title: "Home", icon: "mdi-home-city" },
+      { title: "My Account", icon: "mdi-account" },
+      { title: "Users", icon: "mdi-account-group-outline" },
+    ],
   }),
   watch: {
     group() {

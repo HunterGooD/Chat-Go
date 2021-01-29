@@ -2,11 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Messages from '../views/Messages.vue'
-
+import NotFoundComponent from '../views/NotFound.vue'
 Vue.use(VueRouter)
 
-const routes = [
-  {
+const routes = [{
     path: '/',
     name: 'Home',
     meta: {
@@ -37,6 +36,10 @@ const routes = [
       auth: false,
     },
     component: Home
+  },
+  {
+    path: '*',
+    component: NotFoundComponent
   }
 ]
 
