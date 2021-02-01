@@ -21,8 +21,8 @@ require (
 	golang.org/x/term v0.0.0-20201210144234-2321bbc49cbf // indirect
 	golang.org/x/text v0.3.5 // indirect
 	golang.org/x/tools v0.0.0-20210114065538-d78b04bdf963 // indirect
-	gorm.io/driver/mysql v1.0.4 // indirect
-	gorm.io/driver/postgres v1.0.7 // indirect
-	gorm.io/driver/sqlite v1.1.4 // indirect
+	gorm.io/driver/mysql v1.0.4
+	gorm.io/driver/postgres v1.0.7
+	gorm.io/driver/sqlite v1.1.4
 	gorm.io/gorm v1.20.12
 )

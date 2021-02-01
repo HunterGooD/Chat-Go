@@ -17,3 +17,16 @@ func helloWorld(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, obj)
 }
+
+func (a *App) signUp(c *gin.Context) {
+	user := &SignUpUser{}
+	if err := c.Bind(user); err != nil {
+		errorJSON := &ErrorRequest{
+			Error:   err.Error(),
+			Message: "не удачная обработка данных",
+			Errors:  nil,
+		}
+		c.AbortWithStatusJSON(http.StatusBadRequest, errorJSON)
+	}
+	c.JSON(http.StatusCreated, "")
+}

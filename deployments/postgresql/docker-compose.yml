@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:12-alpine
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - ./pg_project:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: chat_db
+      POSTGRES_PASSWORD: qwerty

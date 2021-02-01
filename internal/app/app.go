@@ -23,9 +23,10 @@ var upgrader = websocket.Upgrader{
 
 // App структура главного приложения
 type App struct {
-	Conf  *Config
-	db    *gorm.DB
-	users []*User
+	Conf          *Config
+	db            *gorm.DB
+	users         []*User
+	queueMessages []string
 }
 
 // NewApp структура приложения
@@ -85,6 +86,7 @@ func (a *App) InitDB() {
 	}
 }
 
+// Init инициализация приложения и ключевые настройки
 func (a *App) Init() {
 	a.InitConfig()
 	a.InitDB()
@@ -113,6 +115,7 @@ func (a *App) RunServer() {
 	router.StaticFS("/assets/", assetsBox)
 
 	router.GET("/api", helloWorld)
+	router.Any("/api/signup", a.signUp)
 
 	router.NoRoute(func(c *gin.Context) {
 		data, err := htmlFiles.FindString("index.html")

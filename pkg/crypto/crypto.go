@@ -5,24 +5,13 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/rand"
+	"crypto/sha1"
 	"encoding/base64"
+	"encoding/hex"
 	"io"
-	"math"
 
 	"golang.org/x/crypto/bcrypt"
 )
-
-// GenerateKey ключ из до нужной длины
-func GenerateKey(key string, size int) []byte {
-	var result string
-	if len(key) >= size {
-		return []byte(key[:size])
-	}
-	for i := 0; i < int(math.Ceil(float64(size)/float64(len(key)))); i++ {
-		result += key
-	}
-	return []byte(result[:size])
-}
 
 // Base64Decode из base64 декодирует в строку
 func Base64Decode(data string) string {
@@ -36,6 +25,13 @@ func Base64Decode(data string) string {
 // Base64Encode строку в base64 кодирует
 func Base64Encode(data string) string {
 	return base64.StdEncoding.EncodeToString([]byte(data))
+}
+
+// CreateHash функция создающая хэш 256
+func CreateHash(s []byte) string {
+	h := sha1.New()
+	h.Write(s)
+	return hex.EncodeToString(h.Sum(nil))
 }
 
 // HashPassword создает хэш пароля bcrypt
