@@ -91,7 +91,7 @@ func (a *App) Init() {
 	a.InitConfig()
 	a.InitDB()
 
-	a.db.AutoMigrate(&UserDB{})
+	a.db.AutoMigrate(&UserDB{}, &ImageDB{}, &MessageDB{}, &RoomDB{})
 
 	if os.Getenv("DEVEL") != "" {
 		gin.SetMode(gin.DebugMode)

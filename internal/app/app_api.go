@@ -19,14 +19,22 @@ func helloWorld(c *gin.Context) {
 }
 
 func (a *App) signUp(c *gin.Context) {
-	user := &SignUpUser{}
-	if err := c.Bind(user); err != nil {
+	user := SignUpUser{}
+	if err := c.Bind(&user); err != nil {
 		errorJSON := &ErrorRequest{
 			Error:   err.Error(),
 			Message: "не удачная обработка данных",
 			Errors:  nil,
 		}
 		c.AbortWithStatusJSON(http.StatusBadRequest, errorJSON)
+		return
+	} else if (user == SignUpUser{}) {
+		errorJSON := &ErrorRequest{
+			Error:   "Пустые значения полей",
+			Message: "Заполните все поля",
+		}
+		c.AbortWithStatusJSON(http.StatusBadRequest, errorJSON)
+		return
 	}
 	c.JSON(http.StatusCreated, "")
 }

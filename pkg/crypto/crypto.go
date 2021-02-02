@@ -28,9 +28,9 @@ func Base64Encode(data string) string {
 }
 
 // CreateHash функция создающая хэш 256
-func CreateHash(s []byte) string {
+func CreateHash(b []byte) string {
 	h := sha1.New()
-	h.Write(s)
+	h.Write(b)
 	return hex.EncodeToString(h.Sum(nil))
 }
 
