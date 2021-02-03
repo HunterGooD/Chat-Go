@@ -12,24 +12,25 @@ type UserDB struct {
 	Avatar   int
 	Token    string      `gorm:"size:100"`
 	Rooms    []RoomDB    `gorm:"many2many:user_rooms"`
-	Messages []MessageDB `gorm:"foreignKey:User"`
-	Posts    []PostDB    `gorm:"foreignKey:User"`
+	Messages []MessageDB `gorm:"foreignKey:UserID"`
+	Posts    []PostDB    `gorm:"foreignKey:UserID"`
+	Likies   []LikeDB    `gorm:"foreignKey:UserID"`
 }
 
 // MessageDB структура для  хранения сообщений
 type MessageDB struct {
 	gorm.Model
-	Text string `gorm:"type:text"`
-	Room int
-	User int
+	Text   string `gorm:"type:text"`
+	Room   int
+	UserID int
 }
 
 // RoomDB структура комнаты
 type RoomDB struct {
 	gorm.Model
-	Name       string    `gorm:"size:20"`
-	Hash       string    `gorm:"size:100"`
-	MessageKey MessageDB `gorm:"foreignKey:Room"`
+	Name       string      `gorm:"size:20"`
+	Hash       string      `gorm:"size:100"`
+	MessageKey []MessageDB `gorm:"foreignKey:Room"`
 }
 
 // ImageDB структура для хранения картинок
@@ -44,7 +45,14 @@ type ImageDB struct {
 // PostDB для постов
 type PostDB struct {
 	gorm.Model
-	Text string `gorm:"type:text"`
-	User int
-	Img  int
+	Likies []LikeDB `gorm:"foreignKey:PostID"`
+	Text   string   `gorm:"type:text"`
+	UserID int
+}
+
+// LikeDB лайки
+type LikeDB struct {
+	gorm.Model
+	UserID int
+	PostID int
 }

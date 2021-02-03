@@ -69,15 +69,28 @@ func (a *App) InitDB() {
 		}
 	case "mysql":
 		// Соединение с БД
-		var dsn = ""
+		var dsn = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local",
+			a.Conf.DB.DBUser,
+			a.Conf.Secrets.DBPassword,
+			a.Conf.DB.DBHost,
+			a.Conf.DB.DBPort,
+			a.Conf.DB.DBName,
+		)
 		if db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{}); err != nil {
 			panic(err)
 		} else {
 			a.db = db
 		}
 	case "postgres":
+		//TODO: добавить sslmode в конфиге и временную зону
 		// Соединение с БД
-		var dsn = ""
+		var dsn = fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Europe/Samara",
+			a.Conf.DB.DBHost,
+			a.Conf.DB.DBUser,
+			a.Conf.Secrets.DBPassword,
+			a.Conf.DB.DBName,
+			a.Conf.DB.DBPort,
+		)
 		if db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{}); err != nil {
 			panic(err)
 		} else {
@@ -91,7 +104,7 @@ func (a *App) Init() {
 	a.InitConfig()
 	a.InitDB()
 
-	a.db.AutoMigrate(&UserDB{}, &ImageDB{}, &MessageDB{}, &RoomDB{})
+	a.db.AutoMigrate(&RoomDB{}, &ImageDB{}, &UserDB{}, &MessageDB{}, &PostDB{}, &LikeDB{})
 
 	if os.Getenv("DEVEL") != "" {
 		gin.SetMode(gin.DebugMode)

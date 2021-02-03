@@ -1,5 +1,7 @@
 package utils
 
+import "os"
+
 // ValidLogin проверка валидности логина
 func ValidLogin(login string) bool {
 	return false
@@ -31,4 +33,12 @@ func ValidateUserData(userData map[string]string) bool {
 	}
 
 	return ValidLogin(login) && ValidName(name) && ValidPassword(passw)
+}
+
+// FileExist проверка существования файла
+func FileExist(file string) bool {
+	if _, err := os.Stat(file); os.IsNotExist(err) {
+		return false
+	}
+	return true
 }

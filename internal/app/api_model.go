@@ -13,3 +13,9 @@ type SignUpUser struct {
 	Login    string `json:"login"`
 	Password string `json:"password"`
 }
+
+// SignInUser структура для входа в систему
+type SignInUser struct {
+	Login    string `json:"login"`
+	Password string `json:"password"`
+}

@@ -5,6 +5,10 @@ node_modules
 /web/dist
 dist
 
+# db folders docker
+mariadb
+pg_project
+
 # local env files
 .env.local
 .env.*.local
