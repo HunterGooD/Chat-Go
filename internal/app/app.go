@@ -127,8 +127,9 @@ func (a *App) RunServer() {
 	assetsBox := packr.New("assets", "../../web/dist/assets")
 	router.StaticFS("/assets/", assetsBox)
 
-	router.GET("/api", helloWorld)
-	router.Any("/api/signup", a.signUp)
+	router.POST("/api/signup", a.signUp)
+	router.POST("/api/signin", a.signIn)
+	router.GET("/api/", helloWorld)
 
 	router.NoRoute(func(c *gin.Context) {
 		data, err := htmlFiles.FindString("index.html")

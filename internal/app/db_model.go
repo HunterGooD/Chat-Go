@@ -9,6 +9,7 @@ type UserDB struct {
 	gorm.Model
 	Login    string `gorm:"size:30;index"`
 	Password string `gorm:"size:60"`
+	Admin    bool
 	Avatar   int
 	Token    string      `gorm:"size:100"`
 	Rooms    []RoomDB    `gorm:"many2many:user_rooms"`

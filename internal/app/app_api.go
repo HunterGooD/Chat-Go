@@ -36,5 +36,10 @@ func (a *App) signUp(c *gin.Context) {
 		c.AbortWithStatusJSON(http.StatusBadRequest, errorJSON)
 		return
 	}
+
 	c.JSON(http.StatusCreated, "")
+}
+
+func (a *App) signIn(c *gin.Context) {
+
 }

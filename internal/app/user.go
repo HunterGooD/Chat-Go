@@ -1,11 +1,16 @@
 package app
 
-import "github.com/gorilla/websocket"
+import (
+	"crypto/rsa"
+
+	"github.com/gorilla/websocket"
+)
 
 // User структура пользователя подключившегося по вебсокету
 type User struct {
-	Name string
-	Conn *websocket.Conn
+	Name       string
+	Conn       *websocket.Conn
+	PrivateKey *rsa.PrivateKey
 }
 
 // NewUser создание струкутры пользователя

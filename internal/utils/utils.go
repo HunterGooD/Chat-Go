@@ -1,9 +1,12 @@
 package utils
 
-import "os"
+import (
+	"os"
+)
 
 // ValidLogin проверка валидности логина
 func ValidLogin(login string) bool {
+	// re := regexp.MustCompile(`[\w_]{5,}`)
 	return false
 }
 

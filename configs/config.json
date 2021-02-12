@@ -1,6 +1,6 @@
 {
     "db": {
-        "db": "mysql",
+        "db": "sqlite",
         "name": "chat_db",
         "user": "root",
         "password": "",
