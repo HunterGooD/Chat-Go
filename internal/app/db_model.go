@@ -7,11 +7,12 @@ import (
 // UserDB таблица пользователей для БД
 type UserDB struct {
 	gorm.Model
-	Login    string `gorm:"size:30;index"`
+	Login    string `gorm:"size:30"`
+	Name     string `gorm:"size:30;index"`
 	Password string `gorm:"size:60"`
 	Admin    bool
 	Avatar   int
-	Token    string      `gorm:"size:100"`
+	Token    string      `gorm:"size:100;index"`
 	Rooms    []RoomDB    `gorm:"many2many:user_rooms"`
 	Messages []MessageDB `gorm:"foreignKey:UserID"`
 	Posts    []PostDB    `gorm:"foreignKey:UserID"`
