@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"regexp"
@@ -73,4 +74,21 @@ func FileExist(file string) bool {
 		return false
 	}
 	return true
+}
+
+// ToJSON в JSON
+func ToJSON(data interface{}) ([]byte, error) {
+	JSONdata, err := json.Marshal(data)
+	if err != nil {
+		return nil, err
+	}
+	return JSONdata, nil
+}
+
+// FromJSON из JSON
+func FromJSON(data []byte, i interface{}) (interface{}, error) {
+	if err := json.Unmarshal(data, &i); err != nil {
+		return nil, err
+	}
+	return i, nil
 }

@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/HunterGooD/Chat-Go/pkg/crypto"
 	"github.com/gin-gonic/gin"
 	"github.com/gobuffalo/packr/v2"
 	"github.com/gorilla/websocket"
@@ -113,24 +112,20 @@ func (a *App) Init() {
 	}
 
 	// Для получения ключа AES
-	aes := []byte(crypto.Base64Decode(a.Conf.Secrets.AESKey))
-	fmt.Println(len(aes))
-	fmt.Println(aes)
-	fmt.Printf("\n%#v\n", string(aes))
-	fmt.Printf("\n%#v\n", aes)
+	// aes := []byte(crypto.Base64Decode(a.Conf.Secrets.AESKey))
+	// fmt.Println(len(aes))
+	// fmt.Println(aes)
+	// fmt.Printf("\n%#v\n", string(aes))
+	// fmt.Printf("\n%#v\n", aes)
 }
 
 // RunServer запуск сервера
 func (a *App) RunServer() {
 	htmlFiles := packr.New("htmlFiles", "../../web/dist/")
-	router := gin.Default()
+	router := a.SetupRouter()
 	assetsBox := packr.New("assets", "../../web/dist/assets")
+
 	router.StaticFS("/assets/", assetsBox)
-
-	router.POST("/api/signup", a.signUp)
-	router.POST("/api/signin", a.signIn)
-	router.GET("/api/", helloWorld)
-
 	router.NoRoute(func(c *gin.Context) {
 		data, err := htmlFiles.FindString("index.html")
 		if err != nil {
@@ -140,4 +135,13 @@ func (a *App) RunServer() {
 	})
 
 	router.Run(":9090")
+}
+
+// SetupRouter полечение роутов для API
+func (a *App) SetupRouter() *gin.Engine {
+	router := gin.Default()
+	router.POST("/api/signup", a.signUp)
+	router.POST("/api/signin", a.signIn)
+	router.GET("/api/", helloWorld)
+	return router
 }

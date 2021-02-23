@@ -2,9 +2,13 @@ package app
 
 // ErrorRequest ошибки в случаи их возникновения
 type ErrorRequest struct {
-	Error   string            `json:"error"`
-	Message string            `json:"message"`
-	Errors  map[string]string `json:"errors"`
+	Error   string                 `json:"error"`
+	Message string                 `json:"message"`
+	Errors  map[string]interface{} `json:"errors"`
+}
+
+type userAuthResponse struct {
+	Token string
 }
 
 // SignUpUser структура принимающая параметры для регистрации
